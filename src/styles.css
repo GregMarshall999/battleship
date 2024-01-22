@@ -1,1 +1,30 @@
-/* You can add global styles to this file, and also import other style files */
+.cell {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.1s ease;
+}
+
+.player-board .cell:hover {
+    background-color: lightgreen;
+}
+
+.player-board .cell:active {
+    background-color: lightblue;
+}
+
+.opponent-board .cell:hover {
+    background-color: lightcoral;
+}
+
+.opponent-board .cell:active {
+    background-color: lightyellow;
+}
+
+.no-hover {
+    pointer-events: none;
+    background-color: #fff;
+}

@@ -1,0 +1,7 @@
+.game-container {
+    display: flex;
+}
+  
+.separator {
+    margin: 20px;
+}

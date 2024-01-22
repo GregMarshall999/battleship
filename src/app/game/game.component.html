@@ -1,1 +1,8 @@
-<p>game works!</p>
+<div>
+    <h1>Battleship Game</h1>
+    <div class="game-container">
+        <app-board [grid]="playerGrid" [boardOwner]="'player'" class="player-board"></app-board>
+        <div class="seperator">|</div>
+        <app-board [grid]="opponentGrid" [boardOwner]="'opponent'" class="opponent-board"></app-board>
+    </div>
+</div>

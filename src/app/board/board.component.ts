@@ -28,9 +28,39 @@ export class BoardComponent {
         this.currentX = row;
         this.currentY = col;
       }
-      else if(this.placing) {
+      else if(this.placing && this.grid[row][col].value != '') {
         if(true) { //todo verification ships don't overlap
-          
+          this.grid[row][col].placed = true;
+
+          if(row == this.currentX) {
+            if(col < this.currentY) {
+              for (let i = this.currentY-1; i > col; i--) {
+                this.setSelectedShipToCell(row, i);
+                this.grid[row][i].placed = true;
+              }
+            }
+            else {
+              for (let i = this.currentY+1; i < col; i++) {
+                this.setSelectedShipToCell(row, i);
+                this.grid[row][i].placed = true;
+              }
+            }
+          }
+
+          if(col == this.currentY) {
+            if(row < this.currentX) {
+              for (let i = this.currentX-1; i > row; i--) {
+                this.setSelectedShipToCell(i, col);
+                this.grid[i][col].placed = true;
+              }
+            }
+            else {
+              for (let i = this.currentX+1; i < row; i++) {
+                this.setSelectedShipToCell(i, col);
+                this.grid[i][col].placed = true;
+              }
+            }
+          }
         }
         else {
           this.grid[this.currentX][this.currentY].value = '';

@@ -8,10 +8,11 @@ import { Component, Input } from '@angular/core';
 export class BoardComponent {
   @Input() grid: { value: string, clazz: string }[][] = [];
   @Input() boardOwner = '';
+  @Input() selectedShip = '';
 
   onCellClick(row: number, col: number) {
     var letters = [ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J' ];
     
-    console.log(letters[row-1], col, this.boardOwner);
+    console.log(letters[row-1], col, this.boardOwner, this.selectedShip);
   }
 }

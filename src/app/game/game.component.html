@@ -1,8 +1,46 @@
 <div>
-    <h1>Battleship Game</h1>
+    <h1></h1>
     <div class="game-container">
-        <app-board [grid]="playerGrid" [boardOwner]="'player'" class="player-board"></app-board>
+        <app-board [grid]="playerGrid" [boardOwner]="'player'" [selectedShip]="selectedShip" class="player-board"></app-board>
         <div class="seperator">|</div>
-        <app-board [grid]="opponentGrid" [boardOwner]="'opponent'" class="opponent-board"></app-board>
+        <app-board [grid]="opponentGrid" [boardOwner]="'opponent'" [selectedShip]="selectedShip" class="opponent-board"></app-board>
     </div>
+
+    <section class="button-section">
+        <div>
+            <button mat-raised-button color="primary" (click)="shipSelect('carrier')">Place Carrier</button>
+            <mat-radio-group [(ngModel)]="carrierDirection">
+                <mat-radio-button value="vertical">vertical</mat-radio-button>
+                <mat-radio-button value="horizontal">horizontal</mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <div>
+            <button mat-raised-button color="primary" (click)="shipSelect('battleship')">Place Battleship</button>
+            <mat-radio-group [(ngModel)]="battleshipDirection">
+                <mat-radio-button value="vertical">vertical</mat-radio-button>
+                <mat-radio-button value="horizontal">horizontal</mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <div>
+            <button mat-raised-button color="primary" (click)="shipSelect('cruiser')">Place Cruiser</button>
+            <mat-radio-group [(ngModel)]="cruiserDirection">
+                <mat-radio-button value="vertical">vertical</mat-radio-button>
+                <mat-radio-button value="horizontal">horizontal</mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <div>
+            <button mat-raised-button color="primary" (click)="shipSelect('sub')">Place Sub</button>
+            <mat-radio-group [(ngModel)]="subDirection">
+                <mat-radio-button value="vertical">vertical</mat-radio-button>
+                <mat-radio-button value="horizontal">horizontal</mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <div>
+            <button mat-raised-button color="primary" (click)="shipSelect('destroyer')">Place Destroyer</button>
+            <mat-radio-group [(ngModel)]="destroyerDirection">
+                <mat-radio-button value="vertical">vertical</mat-radio-button>
+                <mat-radio-button value="horizontal">horizontal</mat-radio-button>
+            </mat-radio-group>
+        </div>
+    </section>
 </div>

@@ -5,3 +5,11 @@
 .separator {
     margin: 20px;
 }
+
+button {
+    margin-bottom: 5px;
+}
+
+section {
+    padding: 10px;
+}

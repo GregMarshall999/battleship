@@ -9,6 +9,14 @@ export class GameComponent {
   playerGrid: { value: string, clazz: string }[][] = this.generateEmptyGrid();
   opponentGrid: { value: string, clazz: string }[][] = this.generateEmptyGrid();
 
+  selectedShip: string = 'carrier';
+
+  carrierDirection: string = 'vertical';
+  battleshipDirection: string = 'vertical';
+  cruiserDirection: string = 'vertical';
+  subDirection: string = 'vertical';
+  destroyerDirection: string = 'vertical';
+
   generateEmptyGrid(): { value: string, clazz: string }[][] {
     var grid: { value: string, clazz: string }[][] = [];
     var row: { value: string, clazz: string }[] = [];
@@ -37,5 +45,9 @@ export class GameComponent {
     }
     
     return grid;
+  }
+
+  shipSelect(shipType: string) {
+    this.selectedShip = shipType;
   }
 }

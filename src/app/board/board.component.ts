@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-board',
@@ -9,10 +9,24 @@ export class BoardComponent {
   @Input() grid: { value: string, placed: boolean, clazz: string }[][] = [];
   @Input() boardOwner = '';
   @Input() selectedShip = '';
+  
+  @Output() placingEmitter = new EventEmitter<boolean>();
+
+  placing = false;
 
   onCellClick(row: number, col: number) {
-    this.setSelectedShipToCell(row, col);
-    this.grid[row][col].placed = true;
+    if(!this.placing && !this.grid[row][col].placed) {
+      this.setSelectedShipToCell(row, col);
+      this.grid[row][col].placed = true;
+
+      this.placing = true;
+      this.placingEmitter.emit(true);
+    }
+    else if(this.placing) {
+      this.placing = false;
+      this.placingEmitter.emit(false);
+    }
+      
     
     /*var letters = [ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J' ];
 
@@ -22,14 +36,17 @@ export class BoardComponent {
   }
 
   enter(x: number, y: number) {
-    if(!this.grid[x][y].placed) {
+    if(!this.grid[x][y].placed)
       this.setSelectedShipToCell(x, y);
-    }
   }
 
   leave(x: number, y: number) {
     if(!this.grid[x][y].placed) 
       this.grid[x][y].value = '';
+  }
+
+  public reset() {
+    this.placing = false;
   }
 
   private setSelectedShipToCell(x: number, y: number) {

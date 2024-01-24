@@ -1,13 +1,13 @@
 <div>
     <h1></h1>
     <div class="game-container">
-        <app-board [grid]="playerGrid" [boardOwner]="'player'" [selectedShip]="selectedShip" class="player-board"></app-board>
+        <app-board [grid]="playerGrid" [boardOwner]="'player'" [selectedShip]="selectedShip" (placingEmitter)="receiveBoolean($event)" class="player-board"></app-board>
         <div class="seperator">|</div>
         <app-board [grid]="opponentGrid" [boardOwner]="'opponent'" [selectedShip]="selectedShip" class="opponent-board"></app-board>
     </div>
 
     <section class="button-section">
-        <button *ngFor="let ship of ships; let i = index" mat-raised-button color="{{ selectedButton[i] }}" (click)="shipSelect(ship, i)">Place {{ capShip(ship) }}</button>
+        <button *ngFor="let ship of ships; let i = index" mat-raised-button color="{{ selectedButton[i] }}" [disabled]="placing" (click)="shipSelect(ship, i)">Place {{ capShip(ship) }}</button>
     </section>
     <section>
         <button mat-raised-button (click)="reset()">Reset</button>

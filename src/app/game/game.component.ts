@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { BoardComponent } from '../board/board.component';
 
 @Component({
   selector: 'app-game',
@@ -6,6 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./game.component.css']
 })
 export class GameComponent {
+  @ViewChild(BoardComponent) board!: BoardComponent;
+
   playerGrid: { value: string, placed: boolean, clazz: string }[][] = this.generateEmptyGrid();
   opponentGrid: { value: string, placed: boolean, clazz: string }[][] = this.generateEmptyGrid();
 
@@ -14,6 +17,8 @@ export class GameComponent {
   selectedShip: string = this.ships[0];
 
   selectedButton: string[] = ['accent', 'primary', 'primary', 'primary', 'primary'];
+
+  placing: boolean = false;
 
   generateEmptyGrid(): { value: string, placed: boolean, clazz: string }[][] {
     var grid: { value: string, placed: boolean, clazz: string }[][] = [];
@@ -57,11 +62,19 @@ export class GameComponent {
   }
 
   reset() {
+    this.placing = false;
     for (let i = 1; i < this.playerGrid.length; i++) {
       for (let j = 1; j < this.playerGrid[i].length; j++) {
         this.playerGrid[i][j].value = '';
         this.playerGrid[i][j].placed = false;
       }
     }
+
+    this.board.reset();
+  }
+
+  receiveBoolean(value: boolean) {
+    console.log(value);
+    this.placing = value;
   }
 }

@@ -13,8 +13,6 @@ export class BoardComponent {
 
   onCellClick(row: number, col: number) {
     var letters = [ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J' ];
-    
-    console.log('Grid: ', this.grid);
 
     console.log('Grid location: ' + letters[row-1] + '' + col + '\n', 
                 'Grid owner: ' + this.boardOwner + '\n', 
@@ -23,7 +21,13 @@ export class BoardComponent {
   }
 
   enter(x: number, y: number) {
-    this.grid[x][y].value = 'T';
+    switch(this.selectedShip) {
+      case 'carrier':
+        this.grid[x][y].value = 'CV';
+        break;
+      default: 
+        break;
+    }
   }
 
   leave(x: number, y: number) {

@@ -1,6 +1,14 @@
-<div class="board">
+<div *ngIf="boardOwner == 'player'" class="board">
   <div *ngFor="let row of grid; let i = index" class="row">
     <div *ngFor="let cell of row; let j = index" class="cell" [ngClass]="cell.clazz" (click)="onCellClick(i, j)" (mouseenter)="enter(i, j)" (mouseleave)="leave(i, j)">
+      {{ cell.value }}
+    </div>
+  </div>
+</div>
+
+<div *ngIf="boardOwner == 'opponent'" class="board">
+  <div *ngFor="let row of grid; let i = index" class="row">
+    <div *ngFor="let cell of row; let j = index" class="cell" [ngClass]="cell.clazz" (click)="onCellClick(i, j)">
       {{ cell.value }}
     </div>
   </div>

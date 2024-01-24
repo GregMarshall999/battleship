@@ -74,7 +74,6 @@ export class GameComponent {
   }
 
   receiveBoolean(value: boolean) {
-    console.log(value);
     this.placing = value;
   }
 }

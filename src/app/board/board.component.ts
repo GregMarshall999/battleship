@@ -12,32 +12,41 @@ export class BoardComponent {
   
   @Output() placingEmitter = new EventEmitter<boolean>();
 
-  placing = false;
+  placing: boolean = false;
+  currentX = 0;
+  currentY = 0;
 
   onCellClick(row: number, col: number) {
-    if(!this.placing && !this.grid[row][col].placed) {
-      this.setSelectedShipToCell(row, col);
-      this.grid[row][col].placed = true;
-
-      this.placing = true;
-      this.placingEmitter.emit(true);
+    if(this.boardOwner == 'player') {
+      if(!this.placing && !this.grid[row][col].placed) {
+        this.setSelectedShipToCell(row, col);
+        this.grid[row][col].placed = true;
+  
+        this.placing = true;
+        this.placingEmitter.emit(true);
+  
+        this.currentX = row;
+        this.currentY = col;
+      }
+      else if(this.placing) {
+        this.placing = false;
+        this.placingEmitter.emit(false);
+      }
     }
-    else if(this.placing) {
-      this.placing = false;
-      this.placingEmitter.emit(false);
-    }
-      
-    
-    /*var letters = [ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J' ];
-
-    console.log('Grid location: ' + letters[row-1] + '' + col + '\n', 
-                'Grid owner: ' + this.boardOwner + '\n', 
-                'Selected Ship: ' + this.selectedShip);*/
   }
 
   enter(x: number, y: number) {
-    if(!this.grid[x][y].placed)
-      this.setSelectedShipToCell(x, y);
+    if(!this.grid[x][y].placed) {
+      if(this.placing) {
+        if( x == this.currentX && (y == this.currentY-4 || y == this.currentY+4) || 
+            y == this.currentY && (x == this.currentX-4 || x == this.currentX+4)) {
+          this.setSelectedShipToCell(x, y);
+        }
+      }
+      else {
+        this.setSelectedShipToCell(x, y);
+      }
+    }
   }
 
   leave(x: number, y: number) {

@@ -9,10 +9,14 @@ export class BoardComponent {
   @Input() grid: { value: string, clazz: string }[][] = [];
   @Input() boardOwner = '';
   @Input() selectedShip = '';
+  @Input() shipDirection = '';
 
   onCellClick(row: number, col: number) {
     var letters = [ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J' ];
     
-    console.log(letters[row-1], col, this.boardOwner, this.selectedShip);
+    console.log('Grid location: ' + letters[row-1] + '' + col + '\n', 
+                'Grid owner: ' + this.boardOwner + '\n', 
+                'Selected Ship: ' + this.selectedShip + '\n', 
+                'Ship direction: ' + this.shipDirection);
   }
 }

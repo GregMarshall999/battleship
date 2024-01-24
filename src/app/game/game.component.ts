@@ -9,13 +9,9 @@ export class GameComponent {
   playerGrid: { value: string, clazz: string }[][] = this.generateEmptyGrid();
   opponentGrid: { value: string, clazz: string }[][] = this.generateEmptyGrid();
 
-  selectedShip: string = 'carrier';
-
-  carrierDirection: string = 'vertical';
-  battleshipDirection: string = 'vertical';
-  cruiserDirection: string = 'vertical';
-  subDirection: string = 'vertical';
-  destroyerDirection: string = 'vertical';
+  ships: string[] = ['carrier', 'battleship', 'cruiser', 'sub', 'destroyer'];
+  shipDirection: string = 'vertical';
+  selectedShip: string = this.ships[0];
 
   generateEmptyGrid(): { value: string, clazz: string }[][] {
     var grid: { value: string, clazz: string }[][] = [];
@@ -49,5 +45,9 @@ export class GameComponent {
 
   shipSelect(shipType: string) {
     this.selectedShip = shipType;
+  }
+
+  capShip(ship: string): string {
+    return ship.charAt(0).toUpperCase() + ship.substring(1);
   }
 }

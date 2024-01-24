@@ -1,17 +1,12 @@
 <div>
     <h1></h1>
     <div class="game-container">
-        <app-board [grid]="playerGrid" [boardOwner]="'player'" [selectedShip]="selectedShip" [shipDirection]="shipDirection" class="player-board"></app-board>
+        <app-board [grid]="playerGrid" [boardOwner]="'player'" [selectedShip]="selectedShip" class="player-board"></app-board>
         <div class="seperator">|</div>
-        <app-board [grid]="opponentGrid" [boardOwner]="'opponent'" [selectedShip]="selectedShip" [shipDirection]="shipDirection" class="opponent-board"></app-board>
+        <app-board [grid]="opponentGrid" [boardOwner]="'opponent'" [selectedShip]="selectedShip" class="opponent-board"></app-board>
     </div>
 
     <section class="button-section">
         <button *ngFor="let ship of ships; let i = index" mat-raised-button color="{{ selectedButton[i] }}" (click)="shipSelect(ship, i)">Place {{ capShip(ship) }}</button>
-        {{ capShip(selectedShip) }} direction:
-        <mat-radio-group [(ngModel)]="shipDirection">
-            <mat-radio-button value="vertical">vertical</mat-radio-button>
-            <mat-radio-button value="horizontal">horizontal</mat-radio-button>
-        </mat-radio-group>
     </section>
 </div>

@@ -6,8 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./game.component.css']
 })
 export class GameComponent {
-  playerGrid: { value: string, clazz: string }[][] = this.generateEmptyGrid();
-  opponentGrid: { value: string, clazz: string }[][] = this.generateEmptyGrid();
+  playerGrid: { value: string, placed: boolean, clazz: string }[][] = this.generateEmptyGrid();
+  opponentGrid: { value: string, placed: boolean, clazz: string }[][] = this.generateEmptyGrid();
 
   ships: string[] = ['carrier', 'battleship', 'cruiser', 'sub', 'destroyer'];
   shipDirection: string = 'vertical';
@@ -15,9 +15,9 @@ export class GameComponent {
 
   selectedButton: string[] = ['accent', 'primary', 'primary', 'primary', 'primary'];
 
-  generateEmptyGrid(): { value: string, clazz: string }[][] {
-    var grid: { value: string, clazz: string }[][] = [];
-    var row: { value: string, clazz: string }[] = [];
+  generateEmptyGrid(): { value: string, placed: boolean, clazz: string }[][] {
+    var grid: { value: string, placed: boolean, clazz: string }[][] = [];
+    var row: { value: string, placed: boolean, clazz: string }[] = [];
     var gridSize = 11;
     var letters = [ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J' ];
 
@@ -26,15 +26,15 @@ export class GameComponent {
         
         if(i == 0) {
           if(j == 0)
-            row.push({ value: "/", clazz: 'no-hover' });
+            row.push({ value: "/", placed: false, clazz: 'no-hover' });
           else
-            row.push({ value: ""+j, clazz: 'no-hover' })
+            row.push({ value: ""+j, placed: false, clazz: 'no-hover' })
         }
         else if(j == 0) {
-          row.push({ value: letters[i-1], clazz: 'no-hover' });
+          row.push({ value: letters[i-1], placed: false, clazz: 'no-hover' });
         }
         else
-          row.push({ value: "", clazz: "" });
+          row.push({ value: "", placed: false, clazz: "" });
 
       }
       

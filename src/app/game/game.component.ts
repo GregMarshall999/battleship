@@ -55,4 +55,13 @@ export class GameComponent {
   capShip(ship: string): string {
     return ship.charAt(0).toUpperCase() + ship.substring(1);
   }
+
+  reset() {
+    for (let i = 1; i < this.playerGrid.length; i++) {
+      for (let j = 1; j < this.playerGrid[i].length; j++) {
+        this.playerGrid[i][j].value = '';
+        this.playerGrid[i][j].placed = false;
+      }
+    }
+  }
 }

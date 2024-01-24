@@ -9,4 +9,7 @@
     <section class="button-section">
         <button *ngFor="let ship of ships; let i = index" mat-raised-button color="{{ selectedButton[i] }}" (click)="shipSelect(ship, i)">Place {{ capShip(ship) }}</button>
     </section>
+    <section>
+        <button mat-raised-button (click)="reset()">Reset</button>
+    </section>
 </div>

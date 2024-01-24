@@ -14,11 +14,11 @@ export class BoardComponent {
     this.setSelectedShipToCell(row, col);
     this.grid[row][col].placed = true;
     
-    var letters = [ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J' ];
+    /*var letters = [ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J' ];
 
     console.log('Grid location: ' + letters[row-1] + '' + col + '\n', 
                 'Grid owner: ' + this.boardOwner + '\n', 
-                'Selected Ship: ' + this.selectedShip);
+                'Selected Ship: ' + this.selectedShip);*/
   }
 
   enter(x: number, y: number) {

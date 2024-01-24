@@ -38,8 +38,29 @@ export class BoardComponent {
   enter(x: number, y: number) {
     if(!this.grid[x][y].placed) {
       if(this.placing) {
-        if( x == this.currentX && (y == this.currentY-4 || y == this.currentY+4) || 
-            y == this.currentY && (x == this.currentX-4 || x == this.currentX+4)) {
+        var shipSize = 0;
+        switch(this.selectedShip) {
+          case 'carrier':
+            shipSize = 4;
+            break;
+          case 'battleship':
+            shipSize = 3;
+            break;
+          case 'cruiser':
+            shipSize = 2;
+            break;
+          case 'sub':
+            shipSize = 2;
+            break;
+          case 'destroyer':
+            shipSize = 1;
+            break;
+          default: 
+            break;
+        }
+
+        if( x == this.currentX && (y == this.currentY-shipSize || y == this.currentY+shipSize) || 
+            y == this.currentY && (x == this.currentX-shipSize || x == this.currentX+shipSize)) {
           this.setSelectedShipToCell(x, y);
         }
       }

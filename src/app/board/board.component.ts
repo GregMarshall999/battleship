@@ -29,8 +29,19 @@ export class BoardComponent {
         this.currentY = col;
       }
       else if(this.placing) {
+        if(true) { //todo verification ships don't overlap
+          
+        }
+        else {
+          this.grid[this.currentX][this.currentY].value = '';
+          this.grid[this.currentX][this.currentY].placed = false;
+        }
+
+    
         this.placing = false;
         this.placingEmitter.emit(false);
+
+        this.enter(row, col);
       }
     }
   }

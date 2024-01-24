@@ -13,6 +13,8 @@ export class GameComponent {
   shipDirection: string = 'vertical';
   selectedShip: string = this.ships[0];
 
+  selectedButton: string[] = ['accent', 'primary', 'primary', 'primary', 'primary'];
+
   generateEmptyGrid(): { value: string, clazz: string }[][] {
     var grid: { value: string, clazz: string }[][] = [];
     var row: { value: string, clazz: string }[] = [];
@@ -43,8 +45,11 @@ export class GameComponent {
     return grid;
   }
 
-  shipSelect(shipType: string) {
+  shipSelect(shipType: string, buttonIndex: number) {
     this.selectedShip = shipType;
+
+    this.selectedButton = ['primary', 'primary', 'primary', 'primary', 'primary'];
+    this.selectedButton[buttonIndex] = 'accent';
   }
 
   capShip(ship: string): string {

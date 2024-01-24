@@ -7,7 +7,7 @@
     </div>
 
     <section class="button-section">
-        <button *ngFor="let ship of ships" mat-raised-button color="primary" (click)="shipSelect(ship)">Place {{ capShip(ship) }}</button>
+        <button *ngFor="let ship of ships; let i = index" mat-raised-button color="{{ selectedButton[i] }}" (click)="shipSelect(ship, i)">Place {{ capShip(ship) }}</button>
         {{ capShip(selectedShip) }} direction:
         <mat-radio-group [(ngModel)]="shipDirection">
             <mat-radio-button value="vertical">vertical</mat-radio-button>

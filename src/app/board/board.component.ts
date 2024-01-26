@@ -11,6 +11,7 @@ export class BoardComponent {
   @Input() selectedShip = '';
   
   @Output() placingEmitter = new EventEmitter<boolean>();
+  @Output() placedEmitter = new EventEmitter<{ ship: number, placed: boolean }>();
 
   placing: boolean = false;
   currentX = 0;
@@ -61,6 +62,26 @@ export class BoardComponent {
               }
             }
           }
+
+          switch(this.selectedShip) {
+            case 'carrier':
+              this.placedEmitter.emit({ ship: 0, placed: true });
+              break;
+            case 'battleship':
+              this.placedEmitter.emit({ ship: 1, placed: true });
+              break;
+            case 'cruiser':
+              this.placedEmitter.emit({ ship: 2, placed: true });
+              break;
+            case 'sub':
+              this.placedEmitter.emit({ ship: 3, placed: true });
+              break;
+            case 'destroyer':
+              this.placedEmitter.emit({ ship: 4, placed: true });
+              break;
+            default: 
+              break;
+          }          
         }
         else {
           this.grid[this.currentX][this.currentY].value = '';

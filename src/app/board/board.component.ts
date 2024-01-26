@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ApiService } from '../service/api-service';
 
 @Component({
   selector: 'app-board',
@@ -8,7 +9,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class BoardComponent {
   @Input() grid: { value: string, placed: boolean, clazz: string }[][] = [];
   @Input() boardOwner = '';
-  @Input() selectedShip = '';
+  @Input() selectedShip: string = '';
+  @Input() ready = false;
   
   @Output() placingEmitter = new EventEmitter<boolean>();
   @Output() placedEmitter = new EventEmitter<{ ship: number, placed: boolean }>();
@@ -16,6 +18,8 @@ export class BoardComponent {
   placing: boolean = false;
   currentX = 0;
   currentY = 0;
+
+  constructor(private service: ApiService) {}
 
   onCellClick(row: number, col: number) {
     if(this.boardOwner == 'player') {
@@ -94,39 +98,53 @@ export class BoardComponent {
         this.enter(row, col);
       }
     }
+
+    if(this.boardOwner == 'opponent') {//&& this.ready) {
+      this.service.test().subscribe(d => {
+        console.log('test');
+      });
+    }
   }
 
   enter(x: number, y: number) {
-    if(!this.grid[x][y].placed) {
-      if(this.placing) {
-        var shipSize = 0;
-        switch(this.selectedShip) {
-          case 'carrier':
-            shipSize = 4;
-            break;
-          case 'battleship':
-            shipSize = 3;
-            break;
-          case 'cruiser':
-            shipSize = 2;
-            break;
-          case 'sub':
-            shipSize = 2;
-            break;
-          case 'destroyer':
-            shipSize = 1;
-            break;
-          default: 
-            break;
+    if(this.boardOwner == 'player') {      
+      if(!this.grid[x][y].placed) {
+        if(this.placing) {
+          var shipSize = 0;
+          switch(this.selectedShip) {
+            case 'carrier':
+              shipSize = 4;
+              break;
+            case 'battleship':
+              shipSize = 3;
+              break;
+            case 'cruiser':
+              shipSize = 2;
+              break;
+            case 'sub':
+              shipSize = 2;
+              break;
+            case 'destroyer':
+              shipSize = 1;
+              break;
+            default: 
+              break;
+          }
+  
+          if( x == this.currentX && (y == this.currentY-shipSize || y == this.currentY+shipSize) || 
+              y == this.currentY && (x == this.currentX-shipSize || x == this.currentX+shipSize)) {
+            this.setSelectedShipToCell(x, y);
+          }
         }
-
-        if( x == this.currentX && (y == this.currentY-shipSize || y == this.currentY+shipSize) || 
-            y == this.currentY && (x == this.currentX-shipSize || x == this.currentX+shipSize)) {
+        else {
           this.setSelectedShipToCell(x, y);
         }
       }
-      else {
-        this.setSelectedShipToCell(x, y);
+    }
+    
+    if(this.boardOwner == 'opponent') {//&& this.ready) {
+      if(!this.grid[x][y].placed) {
+        this.grid[x][y].value = 'X';
       }
     }
   }

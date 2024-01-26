@@ -22,6 +22,8 @@ export class GameComponent {
   placeReceiver!: { ship: number, placed: boolean };
   placed: boolean[] = [ false, false, false, false, false ];
 
+  ready: boolean = false;
+
   generateEmptyGrid(): { value: string, placed: boolean, clazz: string }[][] {
     var grid: { value: string, placed: boolean, clazz: string }[][] = [];
     var row: { value: string, placed: boolean, clazz: string }[] = [];
@@ -74,6 +76,7 @@ export class GameComponent {
 
     this.board.reset();
     this.placed = [ false, false, false, false, false ];
+    this.ready = false;
   }
 
   receiveBoolean(value: boolean) {
@@ -82,5 +85,9 @@ export class GameComponent {
 
   receivePlaceConfirmation(value: { ship: number, placed: boolean }) {
     this.placed[value.ship] = value.placed;
+  }
+
+  startGame() {
+    this.ready = true;
   }
 }

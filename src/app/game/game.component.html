@@ -3,14 +3,14 @@
     <div class="game-container">
         <app-board [grid]="playerGrid" [boardOwner]="'player'" [selectedShip]="selectedShip" (placingEmitter)="receiveBoolean($event)" (placedEmitter)="receivePlaceConfirmation($event)" class="player-board"></app-board>
         <div class="seperator">|</div>
-        <app-board [grid]="opponentGrid" [boardOwner]="'opponent'" [selectedShip]="selectedShip" class="opponent-board"></app-board>
+        <app-board [grid]="opponentGrid" [boardOwner]="'opponent'" [ready]="ready" class="opponent-board"></app-board>
     </div>
 
     <section *ngIf="!placed[0] || !placed[1] || !placed[2] || !placed[3] || !placed[4]" class="button-section">
         <button *ngFor="let ship of ships; let i = index" mat-raised-button color="{{ selectedButton[i] }}" [disabled]="placing || placed[i]" (click)="shipSelect(ship, i)">Place {{ capShip(ship) }}</button>
     </section>
     <section>
-        <button *ngIf="placed[0] && placed[1] && placed[2] && placed[3] && placed[4]" mat-raised-button color="primary">Start</button>
+        <button *ngIf="placed[0] && placed[1] && placed[2] && placed[3] && placed[4]" mat-raised-button color="primary" (click)="startGame()">Start</button>
         <button mat-raised-button (click)="reset()">Reset</button>
     </section>
 </div>

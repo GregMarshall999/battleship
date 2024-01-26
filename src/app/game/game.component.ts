@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { BoardComponent } from '../board/board.component';
+import { ApiService } from '../service/api-service';
 
 @Component({
   selector: 'app-game',
@@ -23,6 +24,8 @@ export class GameComponent {
   placed: boolean[] = [ false, false, false, false, false ];
 
   ready: boolean = false;
+
+  constructor(private service: ApiService) {}
 
   generateEmptyGrid(): { value: string, placed: boolean, clazz: string }[][] {
     var grid: { value: string, placed: boolean, clazz: string }[][] = [];
@@ -88,6 +91,7 @@ export class GameComponent {
   }
 
   startGame() {
+    this.service.newGame(this.playerGrid).subscribe();
     this.ready = true;
   }
 }

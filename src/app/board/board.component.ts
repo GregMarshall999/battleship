@@ -101,7 +101,7 @@ export class BoardComponent {
 
     if(this.boardOwner == 'opponent') {//&& this.ready) {
       this.service.test().subscribe(d => {
-        console.log('test');
+        console.log(d);
       });
     }
   }

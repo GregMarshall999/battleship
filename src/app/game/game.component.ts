@@ -74,6 +74,9 @@ export class GameComponent {
       for (let j = 1; j < this.playerGrid[i].length; j++) {
         this.playerGrid[i][j].value = '';
         this.playerGrid[i][j].placed = false;
+
+        this.opponentGrid[i][j].value = '';
+        this.opponentGrid[i][j].placed = false;
       }
     }
 
@@ -91,7 +94,9 @@ export class GameComponent {
   }
 
   startGame() {
-    this.service.newGame(this.playerGrid).subscribe();
+    this.service.newGame().subscribe(d => {
+      console.log('data', d);
+    });
     this.ready = true;
   }
 }

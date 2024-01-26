@@ -87,7 +87,6 @@ export class BoardComponent {
           this.grid[this.currentX][this.currentY].value = '';
           this.grid[this.currentX][this.currentY].placed = false;
         }
-
     
         this.placing = false;
         this.placingEmitter.emit(false);

@@ -6,10 +6,11 @@
         <app-board [grid]="opponentGrid" [boardOwner]="'opponent'" [selectedShip]="selectedShip" class="opponent-board"></app-board>
     </div>
 
-    <section class="button-section">
+    <section *ngIf="!placed[0] || !placed[1] || !placed[2] || !placed[3] || !placed[4]" class="button-section">
         <button *ngFor="let ship of ships; let i = index" mat-raised-button color="{{ selectedButton[i] }}" [disabled]="placing || placed[i]" (click)="shipSelect(ship, i)">Place {{ capShip(ship) }}</button>
     </section>
     <section>
+        <button *ngIf="placed[0] && placed[1] && placed[2] && placed[3] && placed[4]" mat-raised-button color="primary">Start</button>
         <button mat-raised-button (click)="reset()">Reset</button>
     </section>
 </div>

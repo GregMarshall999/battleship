@@ -29,7 +29,7 @@ export class BoardComponent {
         this.currentY = col;
       }
       else if(this.placing && this.grid[row][col].value != '') {
-        if(true) { //todo verification ships don't overlap
+        if(this.checkAvailablePosition(row, col)) {
           this.grid[row][col].placed = true;
 
           if(row == this.currentX) {
@@ -140,5 +140,45 @@ export class BoardComponent {
       default: 
         break;
     }
+  }
+
+  private checkAvailablePosition(x: number, y: number): boolean {
+    if(x == this.currentX) {
+      if(y < this.currentY) {
+        for (let i = y+1; i < this.currentY; i++) {
+          if(this.grid[x][i].placed) {
+            return false;
+          }
+        }
+      }
+
+      if(y > this.currentY) {
+        for (let i = y-1; i > this.currentY; i--) {
+          if(this.grid[x][i].placed) {
+            return false;
+          }
+        }
+      }
+    }
+
+    if(y == this.currentY) {
+      if(x < this.currentX) {
+        for (let i = x+1; i < this.currentX; i++) {
+          if(this.grid[i][y].placed) {
+            return false;
+          }
+        }
+      }
+
+      if(x > this.currentX) {
+        for (let i = x-1; i > this.currentX; i--) {
+          if(this.grid[i][y].placed) {
+            return false;
+          }
+        }
+      }
+    }
+
+    return true;
   }
 }
